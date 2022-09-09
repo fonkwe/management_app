@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path= require('path');
 const ejs = require('ejs');
 
+
 const app = express();
 
 dotenv.config({path: 'config.env'})
@@ -23,11 +24,9 @@ app.set('view engine', 'ejs');
 app.use('/css', express.static(path.resolve(__dirname, 'assets/css')));
 app.use('/js', express.static(path.resolve(__dirname, 'assets/js')));
 
-app.get('/', (req, res) => {
-    res.render('index', {
-        title: "User Management System"
-    });
-})
+//load routers
+
+app.use('/', require('./server/routes/router') )
 
 app.listen(PORT, () => {
     console.log(`Server is up and running on http://localhost:${PORT}`)
